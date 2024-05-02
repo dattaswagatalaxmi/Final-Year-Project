@@ -1,0 +1,23 @@
+import pandas as pd
+
+# Read Excel file
+file_path = r"D:\JNWORK\yoursec_file.xlsx"  # Update with your file path
+df = pd.read_excel(file_path)
+
+# Extract sequences from column 'A' and edit them
+edited_sequences = []
+for value in df['A']:
+    if isinstance(value, str):  # Check if the value is already a string
+        edited_sequence = value[2:-2]  # Remove first and last two letters
+    else:
+        edited_sequence = str(value)[2:-2]  # Convert to string and then manipulate
+    edited_sequences.append(edited_sequence)
+
+# Add new column 'Edited_seq' with edited sequences
+df['Edited_seq'] = edited_sequences
+
+# Save the modified DataFrame to a new Excel file or overwrite the existing file
+output_file_path = r"D:\JNWORK\yoursec_file.xlsx" # Update with your desired output file path
+df.to_excel(output_file_path, index=False)
+
+print("New column 'Edited_seq' added to the DataFrame and saved to", output_file_path)
